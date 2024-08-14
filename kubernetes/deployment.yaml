@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-devops-app-gke-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-devops-app-gke
+  template:
+    metadata:
+      labels:
+        app: my-devops-app-gke
+    spec:
+      containers:
+        - name: my-devops-app-gke
+          image: gcr.io/cr-vs-gke/my-devops-app-gke
+          ports:
+            - containerPort: 8080
