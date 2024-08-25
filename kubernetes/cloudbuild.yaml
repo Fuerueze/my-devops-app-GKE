@@ -20,8 +20,9 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['kubectl', 'set', 'image', 'deployment/my-gke-deployment', 'my-container=gcr.io/cr-vs-gke/my-devops-app:latest', '--namespace=default']
 
+service_account: '524918356832-compute@developer.gserviceaccount.com'
+
 images:
   - 'gcr.io/cr-vs-gke/my-devops-app:latest'
 
-options:
-  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
+logs_bucket: 'gs://my-logs-bucket98'
