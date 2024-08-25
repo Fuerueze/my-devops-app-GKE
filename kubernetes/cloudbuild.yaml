@@ -23,4 +23,5 @@ steps:
 images:
   - 'gcr.io/cr-vs-gke/my-devops-app:latest'
 
-logs_bucket: 'gs://my-logs-bucket'
+options:
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
