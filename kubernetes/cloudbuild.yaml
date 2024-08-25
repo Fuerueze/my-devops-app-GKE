@@ -9,18 +9,18 @@ steps:
         GOOS=linux GOARCH=amd64 go build -o main .
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/cr-vs-gke/my-devops-app-gke:latest', '.']
+    args: ['build', '-t', 'gcr.io/cr-vs-gke/my-devops-app:latest', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/cr-vs-gke/my-devops-app-gke:latest']
+    args: ['push', 'gcr.io/cr-vs-gke/my-devops-app:latest']
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['kubectl', 'apply', '-f', 'deployment.yaml']
+    args: ['run', 'deploy', 'my-cloud-run-service', '--image', 'gcr.io/cr-vs-gke/my-devops-app:latest', '--region', 'us-central1', '--platform', 'managed']
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['kubectl', 'apply', '-f', 'service.yaml']
+    args: ['kubectl', 'set', 'image', 'deployment/my-gke-deployment', 'my-container=gcr.io/cr-vs-gke/my-devops-app:latest', '--namespace=default']
 
 images:
-  - 'gcr.io/cr-vs-gke/my-devops-app-gke:latest'
+  - 'gcr.io/cr-vs-gke/my-devops-app:latest'
 
-logs_bucket: 'gs://my-logs-bucket98'
+logs_bucket: 'gs://my-logs-bucket'
