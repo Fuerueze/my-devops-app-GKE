@@ -8,7 +8,7 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Received request: %s", r.URL.Path)
-	fmt.Fprintf(w, "Hello, GKE, trigger funktioniert!")
+	fmt.Fprintf(w, "Hello, GKE, trigger funktioniert!!!")
 }
 
 func main() {
