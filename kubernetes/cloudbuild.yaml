@@ -9,21 +9,16 @@ steps:
         GOOS=linux GOARCH=amd64 go build -o main .
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/cr-vs-gke/my-devops-app:latest', '.']
+    args: ['build', '-t', 'gcr.io/cr-vs-gke/my-devops-app-gke:latest', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/cr-vs-gke/my-devops-app:latest']
+    args: ['push', 'gcr.io/cr-vs-gke/my-devops-app-gke:latest']
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['run', 'deploy', 'my-cloud-run-service', '--image', 'gcr.io/cr-vs-gke/my-devops-app:latest', '--region', 'us-central1', '--platform', 'managed']
-
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['kubectl', 'set', 'image', 'deployment/my-gke-deployment', 'my-container=gcr.io/cr-vs-gke/my-devops-app:latest', '--namespace=default']
-
-service_account: '524918356832-compute@developer.gserviceaccount.com'
+    args: ['kubectl', 'set', 'image', 'deployment/my-devops-app-gke-deployment', 'my-devops-app-gke=gcr.io/cr-vs-gke/my-devops-app-gke:latest', '--namespace=default']
 
 images:
-  - 'gcr.io/cr-vs-gke/my-devops-app:latest'
+  - 'gcr.io/cr-vs-gke/my-devops-app-gke:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY
