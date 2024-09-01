@@ -10,7 +10,7 @@ COPY . .
 RUN GOOS=linux GOARCH=amd64 go build -o main .
 
 # Stage 2: Final stage
-FROM gcr.io/distroless/base-debian10
+FROM debian:bullseye-slim
 
 COPY --from=builder /app/main /main
 
