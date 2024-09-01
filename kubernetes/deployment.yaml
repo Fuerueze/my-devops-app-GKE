@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: my-devops-app-gke
-          image: gcr.io/cr-vs-gke/my-devops-app-gke
+          image: gcr.io/cr-vs-gke/my-devops-app-gke:latest
           ports:
             - containerPort: 8080
