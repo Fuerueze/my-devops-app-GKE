@@ -14,8 +14,8 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/cr-vs-gke/my-devops-app-gke:latest']
 
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['kubectl', 'set', 'image', 'deployment/my-devops-app-gke-deployment', 'my-devops-app-gke=gcr.io/cr-vs-gke/my-devops-app-gke:latest', '--namespace=default']
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['set', 'image', 'deployment/my-devops-app-gke-deployment', 'my-devops-app-gke=gcr.io/cr-vs-gke/my-devops-app-gke:latest', '--namespace=default']
 
 images:
   - 'gcr.io/cr-vs-gke/my-devops-app-gke:latest'
