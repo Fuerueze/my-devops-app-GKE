@@ -8,7 +8,7 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Received request: %s", r.URL.Path)
-	fmt.Fprintf(w, "Hello, GKE, test,TEST")
+	fmt.Fprintf(w, "Hello, GKE, test,TEST,TEST")
 }
 
 func main() {
