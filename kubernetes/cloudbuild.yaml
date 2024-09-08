@@ -10,7 +10,7 @@ steps:
     args:
       - run
       - --filename=kubernetes/deployment.yaml
-      - --location=us-central1
+      - --location=us-central1-a
       - --cluster=my-gke-cluster
 
 options:
