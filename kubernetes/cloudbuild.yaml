@@ -13,5 +13,12 @@ steps:
       - --location=us-central1-a
       - --cluster=my-gke-cluster
 
+  # Force Kubernetes to restart the deployment to pick up the new image
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['rollout', 'restart', 'deployment/my-devops-app-gke-deployment']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=my-gke-cluster'
+
 options:
   logging: CLOUD_LOGGING_ONLY
