@@ -6,7 +6,7 @@ steps:
     args: ['push', 'gcr.io/cr-vs-gke/my-devops-app-gke:latest']
 
   # deploy container image to GKE
-  - name: "gcr.io/cloud-builders/kubectl"
+  - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
       - --filename=kubernetes/deployment.yaml
