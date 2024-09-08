@@ -1,5 +1,6 @@
 # Stage 1: Build stage
-FROM golang:1.22 AS builder
+#FROM golang:1.22 AS builder
+FROM golang:1.21-bullseye AS builder
 
 WORKDIR /app
 

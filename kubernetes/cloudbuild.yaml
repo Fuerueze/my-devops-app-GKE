@@ -1,43 +1,17 @@
 steps:
-  - name: 'golang:1.22'
-    entrypoint: 'sh'
-    args:
-      - '-c'
-      - |
-        go mod tidy
-        go test ./...
-        GOOS=linux GOARCH=amd64 go build -o main .
-
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/cr-vs-gke/my-devops-app-gke:latest', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/cr-vs-gke/my-devops-app-gke:latest']
 
-  - name: 'gcr.io/cloud-builders/gcloud'
+  # deploy container image to GKE
+  - name: "gcr.io/cloud-builders/gke-deploy"
     args:
-      - 'container'
-      - 'clusters'
-      - 'get-credentials'
-      - 'my-gke-cluster'
-      - '--zone'
-      - 'us-central1-a'
-      - '--project'
-      - 'cr-vs-gke'
-
-  - name: 'gcr.io/cloud-builders/kubectl'
-    env:
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=my-gke-cluster'
-    args:
-      - 'set'
-      - 'image'
-      - 'deployment/my-devops-app-gke-deployment'
-      - 'my-devops-app-gke=gcr.io/cr-vs-gke/my-devops-app-gke:latest'
-      - '--namespace=default'
-
-images:
-  - 'gcr.io/cr-vs-gke/my-devops-app-gke:latest'
+      - run
+      - --filename=deployment.yaml
+      - --location=us-central1
+      - --cluster=my-gke-cluster
 
 options:
   logging: CLOUD_LOGGING_ONLY
