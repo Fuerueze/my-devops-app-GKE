@@ -9,7 +9,7 @@ steps:
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
-      - --filename=deployment.yaml
+      - --filename=kubernetes/deployment.yaml
       - --location=us-central1
       - --cluster=my-gke-cluster
 
