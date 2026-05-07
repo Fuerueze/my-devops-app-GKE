@@ -1,6 +1,5 @@
 # Stage 1: Build stage
-
-FROM golang:1.21-bullseye AS builder
+FROM golang:1.22 AS builder
 
 WORKDIR /app
 
@@ -8,11 +7,13 @@ WORKDIR /app
 COPY . .
 
 # Build the Go application
-RUN GOOS=linux GOARCH=amd64 go build -o main .
+RUN go build -o main .
 
 # Stage 2: Final stage
 FROM debian:bullseye-slim
 
 COPY --from=builder /app/main /main
+
+EXPOSE 8080
 
 CMD ["/main"]
