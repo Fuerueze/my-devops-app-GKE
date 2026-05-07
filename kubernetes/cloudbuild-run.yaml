@@ -1,0 +1,14 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'my-devops-app-service'
+  - '--source'
+  - '.'
+  - '--platform'
+  - 'managed'
+  - '--allow-unauthenticated'
+  - '--region'
+  - 'us-central1'
+logs_bucket: 'gs://cr-vs-gke-bucket'
